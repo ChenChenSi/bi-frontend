@@ -5,6 +5,7 @@
       v-model="widgets"
       :group="{ name: 'widgets', pull: 'clone', put: false }"
       :sort="false"
+      :clone="cloneWidget"
       @start="onDragStart"
       class="widget-list"
     >
@@ -47,6 +48,10 @@ export default {
     };
   },
   methods: {
+    cloneWidget(widget) {
+      // Return a copy of the widget to be dragged
+      return { ...widget };
+    },
     /**
      * Handle native drag start for HTML5 DnD compatibility with CanvasPanel
      * @param {DragEvent} e 

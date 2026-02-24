@@ -78,6 +78,13 @@ export default {
         // Calculate position based on drop coordinates if needed, 
         // but for now let's just append to end or find first empty space.
         // vue-grid-layout handles collision automatically.
+        // We need to calculate the correct Y position to append to the bottom
+        let y = 0;
+        if (this.layout.length > 0) {
+          y = Math.max(...this.layout.map(item => item.y + item.h));
+        }
+        widget.y = y;
+        
         this.addWidget(widget);
       }
     },
