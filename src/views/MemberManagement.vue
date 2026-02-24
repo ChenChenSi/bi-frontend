@@ -39,6 +39,21 @@
         </tbody>
       </table>
     </div>
+
+    <!-- 邀请成员弹窗 -->
+    <div v-if="showInviteModal" class="modal-overlay">
+      <div class="modal">
+        <h3>邀请新成员</h3>
+        <div class="form-group">
+          <label>用户名</label>
+          <input v-model="newMemberName" placeholder="请输入用户名" @keyup.enter="confirmInvite" />
+        </div>
+        <div class="modal-actions">
+          <button class="secondary-btn" @click="cancelInvite">取消</button>
+          <button class="primary-btn" @click="confirmInvite">确定</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,6 +64,8 @@ export default {
     return {
       workspaceId: this.$route.params.id,
       workspaceName: '加载中...',
+      showInviteModal: false,
+      newMemberName: '',
       members: [
         { id: 1, name: 'Admin', role: 'admin', joinedAt: '2023-01-01' },
         { id: 2, name: '张三', role: 'editor', joinedAt: '2023-05-12' },
@@ -62,16 +79,25 @@ export default {
   },
   methods: {
     inviteMember() {
-      const name = prompt('请输入新成员用户名:');
-      if (name) {
+      this.showInviteModal = true;
+      this.newMemberName = '';
+    },
+    confirmInvite() {
+      if (this.newMemberName.trim()) {
         this.members.push({
           id: Date.now(),
-          name,
+          name: this.newMemberName,
           role: 'viewer',
           joinedAt: new Date().toISOString().split('T')[0]
         });
-        alert('邀请发送成功！');
+        this.showInviteModal = false;
+        // alert('邀请发送成功！'); // Optional feedback
+      } else {
+        alert('请输入用户名');
       }
+    },
+    cancelInvite() {
+      this.showInviteModal = false;
     },
     updateRole(member) {
       console.log(`Updated ${member.name}'s role to ${member.role}`);
@@ -146,5 +172,66 @@ select {
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+}
+.primary-btn:hover {
+  background: #40a9ff;
+}
+.secondary-btn {
+  background: #fff;
+  color: #666;
+  border: 1px solid #d9d9d9;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.secondary-btn:hover {
+  color: #1890ff;
+  border-color: #1890ff;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+}
+.modal .form-group {
+  margin-bottom: 24px;
+}
+.modal label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.modal input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
 }
 </style>

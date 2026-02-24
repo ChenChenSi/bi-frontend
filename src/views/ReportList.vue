@@ -144,4 +144,15 @@ th {
 .secondary-btn {
   background: #fff;
   color: #1890ff;
-  border: 1px solid
+  border: 1px solid #1890ff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+}
+</style>
