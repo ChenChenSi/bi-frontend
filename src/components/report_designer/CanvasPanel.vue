@@ -21,6 +21,8 @@
         :i="item.i"
         @click.native="selectWidget(item.i)"
         :class="{ active: item.i === activeWidgetId }"
+        drag-allow-from=".widget-content"
+        drag-ignore-from=".close-btn"
       >
         <div class="widget-content">
           <div class="widget-header">
@@ -154,6 +156,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
+  cursor: move; /* Allow dragging from anywhere in content */
 }
 .widget-header {
   padding: 8px 12px;
@@ -162,7 +165,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   background-color: #fafafa;
-  cursor: move; /* Indicate draggable area */
+  /* cursor: move;  Removed to allow whole component drag */
 }
 .close-btn {
   background: none;
