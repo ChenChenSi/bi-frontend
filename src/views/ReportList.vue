@@ -6,6 +6,7 @@
     <div class="header">
       <h2>{{ workspaceName }} - 报表列表</h2>
       <div class="btn-group">
+        <button class="secondary-btn" @click="manageGroups">用户组管理</button>
         <button class="secondary-btn" @click="manageMembers">成员管理</button>
         <button class="primary-btn" @click="createReport">新建报表</button>
       </div>
@@ -59,6 +60,9 @@ export default {
     this.workspaceName = `工作区 ${this.workspaceId}`;
   },
   methods: {
+    manageGroups() {
+      this.$router.push({ name: 'UserGroupManagement', params: { id: this.workspaceId } });
+    },
     manageMembers() {
       this.$router.push({ name: 'MemberManagement', params: { id: this.workspaceId } });
     },

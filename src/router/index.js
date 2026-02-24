@@ -23,6 +23,11 @@ const routes = [
         path: 'workspace/:id/members',
         name: 'MemberManagement',
         component: () => import('../views/MemberManagement.vue')
+      },
+      {
+        path: 'workspace/:id/groups',
+        name: 'UserGroupManagement',
+        component: () => import('../views/UserGroupManagement.vue')
       }
     ]
   },
