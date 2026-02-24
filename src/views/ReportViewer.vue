@@ -35,10 +35,46 @@
           :i="item.i"
         >
           <div class="widget-wrapper">
-            <BaseChart :config="item" :data="getMockData(item.type)" />
+            <BaseChart 
+              :config="item" 
+              :data="getMockData(item.type)" 
+              @click-data="(data) => handleDrillDown(item, data)"
+            />
           </div>
         </grid-item>
       </grid-layout>
+    </div>
+
+    <!-- 下钻数据弹窗 -->
+    <div v-if="drillDownData" class="modal-overlay" @click.self="closeDrillDown">
+      <div class="modal drill-down-modal">
+        <div class="modal-header">
+          <h3>{{ drillDownTitle }} - 数据详情</h3>
+          <button class="close-btn" @click="closeDrillDown">×</button>
+        </div>
+        <div class="modal-content">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>日期</th>
+                <th>名称</th>
+                <th>数值</th>
+                <th>详情</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(row, index) in drillDownData" :key="index">
+                <td>{{ 1000 + index }}</td>
+                <td>2023-10-{{ 10 + index }}</td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.value }}</td>
+                <td>示例数据</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -58,7 +94,9 @@ export default {
     return {
       reportTitle: '加载中...',
       layout: [],
-      fullscreen: false
+      fullscreen: false,
+      drillDownData: null,
+      drillDownTitle: ''
     };
   },
   created() {
@@ -103,6 +141,20 @@ export default {
         { name: '周六', value: Math.random() * 200 },
         { name: '周日', value: Math.random() * 200 }
       ];
+    },
+    handleDrillDown(widget, data) {
+      console.log('Drill down:', widget.title, data);
+      this.drillDownTitle = `${widget.title} (${data.name})`;
+      
+      // Mock fetching drill-down data based on clicked item
+      // In real app, would call API with widget.dataConfig.sourceId and data.name as filter
+      this.drillDownData = Array(10).fill(0).map((_, i) => ({
+        name: data.name,
+        value: (Math.random() * 100).toFixed(2)
+      }));
+    },
+    closeDrillDown() {
+      this.drillDownData = null;
     }
   }
 }

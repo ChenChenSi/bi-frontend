@@ -81,8 +81,21 @@ export default {
     initChart() {
       if (this.$refs.chartRef) {
         this.chartInstance = echarts.init(this.$refs.chartRef);
+        this.chartInstance.on('click', this.handleChartClick);
         this.updateChart();
       }
+    },
+    /**
+     * Handle chart click event for drill-down
+     * @param {Object} params - ECharts click event params
+     */
+    handleChartClick(params) {
+      this.$emit('click-data', {
+        name: params.name,
+        value: params.value,
+        seriesName: params.seriesName,
+        dataIndex: params.dataIndex
+      });
     },
     /**
      * Update the chart options based on config and data
