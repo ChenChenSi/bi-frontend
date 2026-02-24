@@ -37,20 +37,38 @@ export const WIDGET_TYPES = {
   IMAGE: 'image'
 };
 
+const DEFAULT_SIZES = {
+  [WIDGET_TYPES.BAR]: { w: 6, h: 8 },    // 柱状图通常需要较宽的空间
+  [WIDGET_TYPES.LINE]: { w: 6, h: 8 },   // 折线图与柱状图类似
+  [WIDGET_TYPES.PIE]: { w: 4, h: 8 },    // 饼图可以稍微窄一点
+  [WIDGET_TYPES.TEXT]: { w: 4, h: 4 },   // 文本通常作为标题或说明，较小
+  [WIDGET_TYPES.IMAGE]: { w: 4, h: 6 }   // 图片适中
+};
+
+const DEFAULT_TITLES = {
+  [WIDGET_TYPES.BAR]: '柱状图',
+  [WIDGET_TYPES.LINE]: '折线图',
+  [WIDGET_TYPES.PIE]: '饼图',
+  [WIDGET_TYPES.TEXT]: '文本组件',
+  [WIDGET_TYPES.IMAGE]: '图片组件'
+};
+
 /**
  * Creates a default widget configuration
  * @param {string} type - Widget type
  * @returns {Widget} Default widget object
  */
 export function createDefaultWidget(type) {
+  const size = DEFAULT_SIZES[type] || { w: 6, h: 6 };
+  
   return {
     i: generateUUID(),
     x: 0,
     y: 0,
-    w: 6,
-    h: 4,
+    w: size.w,
+    h: size.h,
     type,
-    title: '新图表',
+    title: DEFAULT_TITLES[type] || '新图表',
     dataConfig: {
       sourceId: '',
       dimensions: [],
