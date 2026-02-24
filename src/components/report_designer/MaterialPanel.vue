@@ -1,6 +1,6 @@
 <template>
   <div class="material-panel">
-    <h3>Components</h3>
+    <h3>组件列表</h3>
     <draggable
       v-model="widgets"
       :group="{ name: 'widgets', pull: 'clone', put: false }"
@@ -38,11 +38,11 @@ export default {
   data() {
     return {
       widgets: [
-        { type: WIDGET_TYPES.BAR, label: 'Bar Chart', icon: '📊' },
-        { type: WIDGET_TYPES.LINE, label: 'Line Chart', icon: '📈' },
-        { type: WIDGET_TYPES.PIE, label: 'Pie Chart', icon: '🍩' },
-        { type: WIDGET_TYPES.TEXT, label: 'Text', icon: '📝' },
-        { type: WIDGET_TYPES.IMAGE, label: 'Image', icon: '🖼️' }
+        { type: WIDGET_TYPES.BAR, label: '柱状图', icon: '📊' },
+        { type: WIDGET_TYPES.LINE, label: '折线图', icon: '📈' },
+        { type: WIDGET_TYPES.PIE, label: '饼图', icon: '🍩' },
+        { type: WIDGET_TYPES.TEXT, label: '文本', icon: '📝' },
+        { type: WIDGET_TYPES.IMAGE, label: '图片', icon: '🖼️' }
       ]
     };
   },

@@ -1,36 +1,36 @@
 <template>
   <div class="config-panel" v-if="activeWidget">
-    <h3>Configuration</h3>
+    <h3>组件配置</h3>
     
     <div class="config-group">
-      <label>Title</label>
+      <label>标题</label>
       <input 
         v-model="localTitle" 
         @input="updateTitle" 
-        placeholder="Chart Title"
+        placeholder="请输入图表标题"
       />
     </div>
 
     <div class="config-group">
-      <label>Chart Type</label>
+      <label>图表类型</label>
       <select disabled :value="activeWidget.type">
-        <option value="bar">Bar Chart</option>
-        <option value="line">Line Chart</option>
-        <option value="pie">Pie Chart</option>
+        <option value="bar">柱状图</option>
+        <option value="line">折线图</option>
+        <option value="pie">饼图</option>
       </select>
     </div>
 
     <div class="config-group">
-      <label>Data Source</label>
+      <label>数据源</label>
       <select v-model="localSourceId" @change="updateDataSource">
-        <option value="">Select Source</option>
-        <option value="source1">Sales Data 2023</option>
-        <option value="source2">User Traffic</option>
+        <option value="">选择数据源</option>
+        <option value="source1">2023 销售数据</option>
+        <option value="source2">用户访问量</option>
       </select>
     </div>
 
     <div class="config-group">
-      <label>Theme Color</label>
+      <label>主题颜色</label>
       <div class="color-picker">
         <div 
           v-for="color in colors" 
@@ -50,12 +50,12 @@
           v-model="localShowLegend" 
           @change="updateLegend"
         />
-        Show Legend
+        显示图例
       </label>
     </div>
   </div>
   <div class="config-panel empty" v-else>
-    Select a widget to configure
+    请选择一个组件进行配置
   </div>
 </template>
 

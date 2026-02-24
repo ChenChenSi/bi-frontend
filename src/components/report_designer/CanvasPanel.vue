@@ -36,7 +36,7 @@
       </grid-item>
     </grid-layout>
     <div v-if="layout.length === 0" class="empty-state">
-      Drag charts here from the left panel
+      从左侧面板拖拽组件到此处
     </div>
   </div>
 </template>
@@ -101,21 +101,21 @@ export default {
     getMockData(type) {
       if (type === 'pie') {
         return [
-          { value: 1048, name: 'Search Engine' },
-          { value: 735, name: 'Direct' },
-          { value: 580, name: 'Email' },
-          { value: 484, name: 'Union Ads' },
-          { value: 300, name: 'Video Ads' }
+          { value: 1048, name: '搜索引擎' },
+          { value: 735, name: '直接访问' },
+          { value: 580, name: '邮件营销' },
+          { value: 484, name: '联盟广告' },
+          { value: 300, name: '视频广告' }
         ];
       }
       return [
-        { name: 'Mon', value: 120 },
-        { name: 'Tue', value: 200 },
-        { name: 'Wed', value: 150 },
-        { name: 'Thu', value: 80 },
-        { name: 'Fri', value: 70 },
-        { name: 'Sat', value: 110 },
-        { name: 'Sun', value: 130 }
+        { name: '周一', value: 120 },
+        { name: '周二', value: 200 },
+        { name: '周三', value: 150 },
+        { name: '周四', value: 80 },
+        { name: '周五', value: 70 },
+        { name: '周六', value: 110 },
+        { name: '周日', value: 130 }
       ];
     }
   }

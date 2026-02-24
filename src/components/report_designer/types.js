@@ -50,7 +50,7 @@ export function createDefaultWidget(type) {
     w: 6,
     h: 4,
     type,
-    title: 'New Chart',
+    title: '新图表',
     dataConfig: {
       sourceId: '',
       dimensions: [],
