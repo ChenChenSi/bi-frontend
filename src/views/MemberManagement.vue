@@ -58,12 +58,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'MemberManagement',
   data() {
     return {
       workspaceId: this.$route.params.id,
-      workspaceName: '加载中...',
       showInviteModal: false,
       newMemberName: '',
       members: [
@@ -73,9 +74,12 @@ export default {
       ]
     };
   },
-  created() {
-    // Mock fetching workspace info
-    this.workspaceName = `工作区 ${this.workspaceId}`;
+  computed: {
+    ...mapGetters(['getWorkspaceById']),
+    workspaceName() {
+      const ws = this.getWorkspaceById(this.workspaceId);
+      return ws ? ws.name : `工作区 ${this.workspaceId}`;
+    }
   },
   methods: {
     inviteMember() {

@@ -14,9 +14,27 @@ export default new Vuex.Store({
       layout: [] // Array of Widget objects
     },
     // ID of the currently selected widget
-    activeWidgetId: null
+    activeWidgetId: null,
+    // Workspaces data
+    workspaces: [
+      { id: 1, name: '销售部工作区', description: '销售报表与数据分析', memberCount: 12, reportCount: 5 },
+      { id: 2, name: '财务部工作区', description: '财务审计与预算报表', memberCount: 8, reportCount: 3 },
+      { id: 3, name: '运营部工作区', description: '用户增长与留存分析', memberCount: 15, reportCount: 8 }
+    ]
   },
   getters: {
+    /**
+     * Get all workspaces
+     */
+    workspaces: state => state.workspaces,
+    
+    /**
+     * Get a specific workspace by ID
+     */
+    getWorkspaceById: (state) => (id) => {
+      return state.workspaces.find(ws => ws.id === parseInt(id));
+    },
+
     /**
      * Get the list of widgets in the layout
      * @param {Object} state 
@@ -74,9 +92,18 @@ export default new Vuex.Store({
       if (state.activeWidgetId === id) {
         state.activeWidgetId = null
       }
+    },
+    /**
+     * Add a new workspace
+     */
+    ADD_WORKSPACE(state, workspace) {
+      state.workspaces.push(workspace);
     }
   },
   actions: {
+    addWorkspace({ commit }, workspace) {
+      commit('ADD_WORKSPACE', workspace);
+    },
     addWidget({ commit }, widget) {
       commit('ADD_WIDGET', widget)
       commit('SET_ACTIVE_WIDGET', widget.i)

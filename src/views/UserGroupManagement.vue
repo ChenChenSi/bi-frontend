@@ -74,12 +74,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'UserGroupManagement',
   data() {
     return {
       workspaceId: this.$route.params.id,
-      workspaceName: '加载中...',
       groups: [
         { 
           id: 1, 
@@ -115,6 +116,11 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['getWorkspaceById']),
+    workspaceName() {
+      const ws = this.getWorkspaceById(this.workspaceId);
+      return ws ? ws.name : `工作区 ${this.workspaceId}`;
+    },
     availableUsers() {
       if (!this.activeGroup) return [];
       const currentMemberIds = this.activeGroup.members.map(m => m.id);

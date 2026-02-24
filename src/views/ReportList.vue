@@ -43,21 +43,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'ReportList',
   data() {
     return {
       workspaceId: this.$route.params.id,
-      workspaceName: '加载中...',
       reports: [
         { id: 1, name: '2023年度销售总结', creator: '张三', updatedAt: '2023-12-01' },
         { id: 2, name: 'Q4 财务报表', creator: '李四', updatedAt: '2023-11-20' },
       ]
     };
   },
-  created() {
-    // Mock fetching workspace info
-    this.workspaceName = `工作区 ${this.workspaceId}`;
+  computed: {
+    ...mapGetters(['getWorkspaceById']),
+    workspaceName() {
+      const ws = this.getWorkspaceById(this.workspaceId);
+      return ws ? ws.name : `工作区 ${this.workspaceId}`;
+    }
   },
   methods: {
     manageGroups() {

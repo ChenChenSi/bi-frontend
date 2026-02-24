@@ -18,22 +18,19 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'WorkspaceList',
-  data() {
-    return {
-      workspaces: [
-        { id: 1, name: '销售部工作区', description: '销售报表与数据分析', memberCount: 12, reportCount: 5 },
-        { id: 2, name: '财务部工作区', description: '财务审计与预算报表', memberCount: 8, reportCount: 3 },
-        { id: 3, name: '运营部工作区', description: '用户增长与留存分析', memberCount: 15, reportCount: 8 }
-      ]
-    };
+  computed: {
+    ...mapGetters(['workspaces'])
   },
   methods: {
+    ...mapActions(['addWorkspace']),
     createWorkspace() {
       // Mock creation
       const id = this.workspaces.length + 1;
-      this.workspaces.push({
+      this.addWorkspace({
         id,
         name: `新工作区 ${id}`,
         description: '新创建的工作区',
