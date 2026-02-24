@@ -12,6 +12,9 @@
     </div>
     
     <div class="canvas-container" :class="{ fullscreen: fullscreen }">
+      <div v-if="fullscreen" class="fullscreen-exit-btn">
+        <button @click="toggleFullscreen">退出全屏</button>
+      </div>
       <grid-layout
         :layout.sync="layout"
         :col-num="12"
@@ -164,5 +167,24 @@ export default {
   border-radius: 4px;
   padding: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.fullscreen-exit-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 200;
+}
+.fullscreen-exit-btn button {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+.fullscreen-exit-btn button:hover {
+  background: rgba(0, 0, 0, 0.7);
 }
 </style>
