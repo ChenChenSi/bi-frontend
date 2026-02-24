@@ -5,7 +5,10 @@
     </div>
     <div class="header">
       <h2>{{ workspaceName }} - 报表列表</h2>
-      <button class="primary-btn" @click="createReport">新建报表</button>
+      <div class="btn-group">
+        <button class="secondary-btn" @click="manageMembers">成员管理</button>
+        <button class="primary-btn" @click="createReport">新建报表</button>
+      </div>
     </div>
     
     <div class="table-container">
@@ -56,6 +59,9 @@ export default {
     this.workspaceName = `工作区 ${this.workspaceId}`;
   },
   methods: {
+    manageMembers() {
+      this.$router.push({ name: 'MemberManagement', params: { id: this.workspaceId } });
+    },
     createReport() {
       this.$router.push({ name: 'ReportDesigner' });
     },
@@ -135,9 +141,7 @@ th {
   border-radius: 4px;
   cursor: pointer;
 }
-.empty {
-  text-align: center;
-  padding: 40px;
-  color: #999;
-}
-</style>
+.secondary-btn {
+  background: #fff;
+  color: #1890ff;
+  border: 1px solid

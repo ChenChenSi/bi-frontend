@@ -18,6 +18,11 @@ const routes = [
         path: 'workspace/:id',
         name: 'ReportList',
         component: () => import('../views/ReportList.vue')
+      },
+      {
+        path: 'workspace/:id/members',
+        name: 'MemberManagement',
+        component: () => import('../views/MemberManagement.vue')
       }
     ]
   },
